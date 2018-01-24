@@ -1,13 +1,14 @@
 from tkinter import *
-import back
 import datetime
+import back
 
-def zapis():
-    f = open('database.csv', 'w')
-    z = str(datetime.datetime.now())
-    f.write(z)
-    print(z)
-    l1.insert(END,z)
+#
+# def zapis():
+#     f = open('database.csv', 'w')
+#     z = str(datetime.datetime.now())
+#     f.write(z)
+#     print(z)
+#     l1.insert(END,z)
 
 
 window=Tk()
@@ -20,7 +21,7 @@ window.geometry("800x900+50+50")
 #     b = Button(window, text=button_names[i])
 #     b.place(x=650,  y=100 + i*30, width=120, height=25)
 
-b1=Button(window, text = 'Oсвежи', command=zapis)
+b1=Button(window, text = 'Oсвежи', command=back.zapis)
 b1.place(x=650, y=20, width=120, height=30)
 
 b2=Button(window, text = 'Провери')
@@ -48,12 +49,14 @@ d2=OptionMenu(window, Ovar2, "Dragi B.","Nikola N.","Goce C.","Dalibor T.", "Igo
 l2=Label(window, text="Оператор:").place(x=555, y=390, width=80, height=30)
 
 l1=Listbox(window)
-l1.place(x=20, y=20, width=500, height=450)
+l1.place(x=20, y=20, width=500, height=455)
+
 
 sb1=Scrollbar(window)
 sb1.place(x=500, y=20, width=20, height=455)
 sb1.configure(command=l1.yview)
 l1.configure(yscrollcommand=sb1.set)
+
 
 l2=Listbox(window)
 l2.place(x=20, y=520, width=755, height=360)
