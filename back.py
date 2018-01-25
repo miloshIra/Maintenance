@@ -24,6 +24,13 @@ def update(Oddel, Mashina, Aktivnost, Data, Operatori):
     link.commit()
     link.close()
 
+def delete(id):
+    link=sqlite3.connect("Records.db")
+    cur=link.cursor()
+    cur.execute("DELETE FROM Stored WHERE id=?",(id,))
+    link.commit()
+    link.close()
+
 def check():
     link=sqlite3.connect("Records.db")
     cur=link.cursor()
@@ -31,6 +38,8 @@ def check():
     rows=cur.fetchall()
     link.close()
     return rows
+
+delete(1)
 
 link()
 update('Pletilici','1','1','21.2.2018','Nikola')
