@@ -2,6 +2,12 @@ from tkinter import *
 import datetime
 import back
 
+def view_stored():    # Prints the database in the Listbox
+    l2.delete(0,END)
+    for row in back.zapisi():
+        l2.insert(END,row)
+
+
 #
 # def zapis():
 #     f = open('database.csv', 'w')
@@ -21,19 +27,18 @@ window.geometry("800x900+50+50")
 #     b = Button(window, text=button_names[i])
 #     b.place(x=650,  y=100 + i*30, width=120, height=25)
 
-b1=Button(window, text = 'Oсвежи', command=back.zapis)
+b1=Button(window, text = 'Предходно', command=view_stored) # Gi pokazuva predhodnite zavrsheni aktivnosti
 b1.place(x=650, y=20, width=120, height=30)
 
-b2=Button(window, text = 'Провери')
+b2=Button(window, text = 'Провери') # Placeholder ne znam sto ke pravi
 b2.place(x=650, y=70, width=120, height=30)
 
-b3=Button(window, text = 'Предходно')
+b3=Button(window, text = 'Освежи') # ja proveruva celata databaza spored segashiot datum
 b3.place(x=650, y=120, width=120, height=30)
 
 b4=Button(window, text = 'Помош')
-b4.place(x=650, y=170, width=120, height=30)
-
-b5=Button(window, text = 'Заврши')
+b4.place(x=650, y=170, width=120, height=30) # Ke gi objasnuva aktivnostite
+b5=Button(window, text = 'Заврши') # Ke pravi zapis od zavrshen aktivnost so momentalniot datum i vreme
 b5.place(x=528, y=425, width=240, height=50)
 
 Ovar1 = StringVar(window)

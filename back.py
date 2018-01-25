@@ -1,6 +1,9 @@
 import datetime
 import sqlite3
 
+
+
+
 def link():
     link=sqlite3.connect("Records.db")
     cur=link.cursor()
@@ -8,14 +11,18 @@ def link():
     link.commit()
     link.close()
 
-# def zapis():
-#     z = str(datetime.datetime.now())
-#     f = open('database.csv', 'w')
-#     f.write(z)
-#     print(z)
-#     l1.insert(END,z)
-#
-# zapis()
+def zapisi():
+    # z = str(datetime.datetime.now())
+    # f = open('database.csv', 'w')
+    # f.write(z)
+    # print(z)
+    link=sqlite3.connect("Records.db")
+    cur=link.cursor()
+    cur.execute("SELECT * FROM Stored")
+    rows=cur.fetchall()
+    link.close()
+    return rows
+zapisi()
 
 def update(Oddel, Mashina, Aktivnost, Data, Operatori):
     link=sqlite3.connect("Records.db")
