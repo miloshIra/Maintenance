@@ -2,10 +2,14 @@ from tkinter import *
 import datetime
 import back
 
+
+# def check_time():   # This should read the databace date and compare it with the current date and print the outdated resutls... :(
+#     for row in back.zapisi():
+#
+
 def view_stored():    # Prints the database in the Listbox
     l2.delete(0,END)
-    for row in back.zapisi():
-        l2.insert(END,row)
+    l2.insert(END,back.df)
 
 
 #
