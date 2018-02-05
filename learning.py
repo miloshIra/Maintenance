@@ -21,9 +21,9 @@
 #
 # mainloop()
 
-'''https://www.python-course.eu/tkinter_layout_management.php
-http://zetcode.com/gui/tkinter/layout/
-http://effbot.org/tkinterbook/pack.htm '''
+# '''https://www.python-course.eu/tkinter_layout_management.php
+# http://zetcode.com/gui/tkinter/layout/
+# http://effbot.org/tkinterbook/pack.htm '''
 #
 # import tkinter as tk
 # import random
@@ -47,7 +47,7 @@ http://effbot.org/tkinterbook/pack.htm '''
 #
 # root.mainloop()
 
-import sqlite3
+import psycopg2 as psy
 import pandas as p
 
 
@@ -59,7 +59,13 @@ import pandas as p
 # cur.close()  # closes cursor
 # link.close() # closes database to avoid promblem later and avoid locking database
 
-link =sqlite3.connect("Records.db")
-df = p.read_sql_query("SELECT * from Stored limit 5", link)
-print(df["Data"])
-type(df)
+link =psy.connect("dbname='forumdb' user='postgres' password='post' host='localhost' port='5432'")
+cur=link.cursor()
+cur.execute("DROP TABLE book")
+# cur.execute("CREATE TABLE IF NOT EXISTS book (id INTEGER PRIMARY KEY, tittle text, author text, year integer, isbn integer )")
+link.commit()
+link.close()
+
+# df = p.read_sql_query("SELECT * from Stored limit 5", link)
+# print(df["Data"])
+# type(df)
