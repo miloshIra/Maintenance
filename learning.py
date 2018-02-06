@@ -61,8 +61,10 @@ import pandas as p
 
 link =psy.connect("dbname='forumdb' user='postgres' password='post' host='localhost' port='5432'")
 cur=link.cursor()
-cur.execute("DROP TABLE book")
-# cur.execute("CREATE TABLE IF NOT EXISTS book (id INTEGER PRIMARY KEY, tittle text, author text, year integer, isbn integer )")
+# cur.execute("DROP TABLE book")
+cur.execute("CREATE TABLE IF NOT EXISTS Machines (id INTEGER PRIMARY KEY, Oddel TEXT, Broj INTEGER)")
+cur.execute("CREATE TABLE IF NOT EXISTS Activity (id INTEGER PRIMARY KEY, Opis TEXT)")
+cur.execute("CREATE TABLE IF NOT EXISTS Machine_Activity (id INTEGER PRIMARY KEY, Aktivsnot_id INTEGER, Mashina_id INTEGER, Frekfentnost INTEGER, Data TEXT, Operator TEXT)")
 link.commit()
 link.close()
 
