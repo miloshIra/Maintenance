@@ -3,7 +3,7 @@
    #TABELI
 #masina (id, oddel, broj)
 #aktivnost (id, ime)
-#3masina_aktivnost(masina_id, aktivnost_id, #frekfentnost, datum_podmackuvanje)
+#3masina_aktivnost(Oddel, masina_id, aktivnost_id, #frekfentnost, datum_podmackuvanje)
 
 SELECT m.id
 FROM masina m
