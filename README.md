@@ -20,3 +20,8 @@ cur=link.cursor()
 cur.execute("QUERY COMMAND HERE")
 link.commit() > makes things happen
 link.close() > closes the link connection
+
+
+"""""" SELECT """""""
+
+SELECT DISTINCT .. does not select duplicates
