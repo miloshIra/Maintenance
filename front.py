@@ -9,8 +9,6 @@ import back
 
 def view_stored():    # Prints the database in the Listbox
     l2.delete(0,END)
-    print(back)
-    print(type(back))
     for index, row in back.iterrows():
         print(row)
         current_row = row['Oddel'] + " - " + row['Mashina'] + " - " +  row['Aktivnost']  + " - " +  row['Data']  + " - " +  row['Operatori']# + ", " + row['Mashina']

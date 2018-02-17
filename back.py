@@ -2,14 +2,14 @@ import datetime
 import pandas as p
 import psycopg2 as psy
 
-#IS PANDAS DATAFRAME MUTABLE OR IS IT A TUPPLE !!!!!??!!?!?!?
+
 
 link =psy.connect("dbname='forumdb' user='postgres' password='post' host='localhost' port='5432'")
 cur=link.cursor()
 cur.execute("DROP TABLE Machines")
 cur.execute("DROP TABLE Activity")
 cur.execute("DROP TABLE Machine_Activity")
-cur.execute("CREATE TABLE IF NOT EXISTS Machines (Oddel TEXT, Broj INTEGER PRIMARY KEY)")
+cur.execute("CREATE TABLE IF NOT EXISTS Machines (Oddel TEXT, Broj INTEGER )")
 cur.execute("CREATE TABLE IF NOT EXISTS Activity (Oddel TEXT, Broj INTEGER, Ime TEXT, Frekfentnost INTEGER)")
 cur.execute("CREATE TABLE IF NOT EXISTS Machine_Activity (Oddel TEXT, Mashina_id INTEGER, Aktivsnot_id INTEGER, Frekfentnost INTEGER, Data DATE, Operator TEXT)")
 link.commit()
@@ -23,13 +23,13 @@ def add_machine(Oddel, Broj):
     link.close()  # This must later transform into a machine adding function
 
 
-# add_machine('Pletilici',1)
-# add_machine('Pletilici',2)
-# add_machine('Pletilici',3)
-# add_machine('Pletilici',5)
-# add_machine('Pletilici',6)
-# add_machine('Pletilici',7)
-# add_machine('Pletilici',8)
+add_machine('Pletilici',1)
+add_machine('Pletilici',2)
+add_machine('Pletilici',3)
+add_machine('Pletilici',5)
+add_machine('Pletilici',6)
+add_machine('Pletilici',7)
+add_machine('Pletilici',8)
 
 def add_activity(Oddel, Broj, Ime, Frekfentnost):
     link =psy.connect("dbname='forumdb' user='postgres' password='post' host='localhost' port='5432'")
