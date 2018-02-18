@@ -62,8 +62,12 @@ def zapisi():
     rows=cur.fetchall()
     return rows
     link.close()
-    # return rows
+    
 zapisi()
+
+
+
+
 #
 # def delete(id):
 #     link=psy.connect("Records.db")
