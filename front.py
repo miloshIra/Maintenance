@@ -38,12 +38,19 @@ b2.place(x=650, y=70, width=120, height=30)
 b3=Button(window, text = 'Освежи') # ja proveruva celata databaza spored segashiot datum
 b3.place(x=650, y=120, width=120, height=30)
 
-def add_new():
+
+
+
+
+
+def add_window():
     top = Toplevel()
     top.title("Додавање нова машина")
     top.geometry("650x200+150+150")
-    bu1=Button(top, text="Додај")
-    bu1.place(x=500, y=500, width=120, height=30)
+    def add_machine_command():
+        back.add_machine(Ovar3.get(),Ovar4.get())
+    bu1=Button(top, text="Додај", command=add_machine_command)
+    bu1.place(x=250, y=150, width=120, height=30)
     bu2=Button(top, text="Откажи")
 
     Ovar3 =StringVar(top)
@@ -52,16 +59,21 @@ def add_new():
     Ovar4 = StringVar(top)
     Ovar4.set("Број")
 
-    d3=OptionMenu(top, Ovar3, "Pletilici","Estruder","Benda/Sbenda","Bobinatura", "Matasa","Ekstrakcija").place(x=650, y=350, width=120, height=25)
-    d4=OptionMenu(window, Ovar4, "1","2","3","4", "5","6","7","8","9","10", "11","12", "13","14","15","16", "17","18", "19","20","21","22","23","24","25","26", "27","28", "29","30",,"31","32", "33","34", "35","36","37","38", "39","40", "41","42","43","44", "45","46", "47","48","49","50").place(x=650, y=390, width=120, height=25)
+    d3=OptionMenu(top, Ovar3, "Pletilici","Estruder","Benda/Sbenda","Bobinatura", "Matasa","Ekstrakcija").place(x=50, y=50, width=100, height=25)
+    d4=OptionMenu(top, Ovar4,  "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26","27","28","29","30","31","32", "33","34", "35","36","37","38", "39","40", "41","42","43","44", "45","46", "47","48","49","50").place(x=150, y=50, width=100, height=25)
 
+def done_window():
+    sure= Toplevel()
+    sure.title("Потврди извршена активност")
+    sure.geometry("500x200+570+200")
+    bu2=Button(sure, text="Oк") # tuka treba da stoi funkcija za dodavanje na zavrshen aktivnost vo databazata
+    la1=Label(sure, text="Јас потврдувам дека означената задача е завршена:").place(x=100,y=30, height=30)
 
-
-b4=Button(window, text = 'Додај', command=add_new)
+b4=Button(window, text = 'Додај', command=add_window)
 b4.place(x=650, y=170, width=120, height=30) # Ke додава нови машини во датабаза
 
 
-b5=Button(window, text = 'Заврши') # Ke pravi zapis od zavrshen aktivnost so momentalniot datum i vreme
+b5=Button(window, text = 'Заврши', command=done_window) # Ke pravi zapis od zavrshen aktivnost so momentalniot datum i vreme
 b5.place(x=528, y=425, width=240, height=50)
 
 Ovar1 = StringVar(window)
