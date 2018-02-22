@@ -18,7 +18,7 @@ link.close()   # Creates a table ako ne postoi ako postoi nisto ... ova ke se br
 def add_machine(Oddel, Broj):
     link =psy.connect("dbname='forumdb' user='postgres' password='post' host='localhost' port='5432'")
     cur=link.cursor()
-    cur.execute("INSERT INTO Machines VALUES(%s,%s)",(Oddel, Broj))
+    cur.execute("INSERT INTO IF NOT EXISTS Machines VALUES(%s,%s)",(Oddel, Broj))
     link.commit()
     link.close()  # This must later transform into a machine adding function
 
@@ -47,15 +47,15 @@ record_keep('Pletilici', 3, 1, 15, '2018-02-09', 'Igor')
 record_keep('Pletilici', 4, 1, 15, '2018-01-06', 'Marijan')
 
 
-def zapisi():
-    link =psy.connect("dbname='forumdb' user='postgres' password='post' host='localhost' port='5432'")
-    cur=link.cursor()
-    cur.execute("SELECT * FROM Machine_Activity WHERE CURRENT_DATE - data > frekfentnost")
-    rows=cur.fetchall()
-    return rows
-    link.close()
-
-zapisi()
+# def zapisi():
+#     link =psy.connect("dbname='forumdb' user='postgres' password='post' host='localhost' port='5432'")
+#     cur=link.cursor()
+#     cur.execute("SELECT * FROM Machine_Activity WHERE CURRENT_DATE - data > frekfentnost")
+#     rows=cur.fetchall()
+#     return rows
+#     link.close()
+#
+# zapisi()
 
 
 
@@ -68,13 +68,13 @@ zapisi()
 #     link.commit()
 #     link.close()
 #
-# def check():
-#     link=psy.connect("Records.db")
-#     cur=link.cursor()
-#     cur.execute("SELECT * FROM Stored")
-#     rows=cur.fetchall()
-#     link.close()
-#     return rows
+def check():
+    link=psy.connect("dbname='forumdb' user='postgres' password='post' host='localhost' port='5432'")
+    cur=link.cursor()
+    cur.execute("SELECT * FROM Machines, Activity, Machine_Activity")
+    rows=cur.fetchall()
+    link.close()
+    return rows
 
 
 # print(check())
