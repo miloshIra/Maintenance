@@ -104,7 +104,7 @@ l1.place(x=20, y=20, width=500, height=455)
 
 
 sb1=Scrollbar(window)
-sb1.place(x=500, y=20, width=20, height=455) #asdasdasdasdasdasda 
+sb1.place(x=500, y=20, width=20, height=455) #asdasdasdasdasdasda asdasdasd
 sb1.configure(command=l1.yview)
 l1.configure(yscrollcommand=sb1.set)
 
