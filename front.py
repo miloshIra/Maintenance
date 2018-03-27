@@ -69,29 +69,33 @@ def add_window():
 
     d3=OptionMenu(top, Ovar3, "Pletilici","Estruder","Benda/Sbenda","Bobinatura", "Matasa","Ekstrakcija").place(x=50, y=50, width=100, height=25)
     d4=OptionMenu(top, Ovar4,  "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26","27","28","29","30","31","32", "33","34", "35","36","37","38", "39","40", "41","42","43","44", "45","46", "47","48","49","50").place(x=150, y=50, width=100, height=25)
-
+    # Try to shorten d4 with ,str(for i in range(0,50)) this is not going to work.. or maybe it will .. who knows :D IT WORK BUT GIVE ME THE FULL LIST TO PICK NOT NUMBER BY NUMBER :(
 
 def done_window():
-    sure= Toplevel()
+    sure = Toplevel()
     sure.title("Потврди извршена активност")
     sure.geometry("500x150+570+200")
-    c = IntVar()
-    cb=Checkbutton(sure, text="Ние " + Ovar1.get() + " и " + Ovar2.get() + " потврдуваме дека означената задача е завршена", variable=c)
-    cb.place(x=40, y=30, height=30)
-    if (Ovar1.get() and Ovar2.get()) == "Избери":
-        print("missing Operatori")
-    bu2=Button(sure, text="Oк").place(x=210, y=80, width=100, height=30) # tuka treba da stoi funkcija za dodavanje na zavrshen aktivnost vo databazata
-    # la1=Label(sure, text="Јас потврдувам дека означената задача е завршена:").place(x=100,y=30, height=30)
-    if (Ovar1.get() and Ovar2.get()) == "Избери":
-        bu2.configure(state=DISABLED)
+    def close_window ():
+        sure.destroy()
+    if (Ovar1.get() and Ovar2.get()) != "Избери":
+        c = IntVar()
+        cb = Checkbutton(sure, text="Ние " + Ovar1.get() + " и " + Ovar2.get() + " потврдуваме дека означената задача е завршена", variable=c)
+        cb.place(x=40, y=30, height=30)
+        bu2 = Button(sure, text="Oк", command=close_window)
+        bu2.place(x=210, y=80, width=100, height=30)
     else:
-        bu2.configure(state=NORMAL)
+        lа1=Label(sure, text="Ве молам изберете оператори").place(x=160, y=60, height=30)# tuka treba da stoi funkcija za dodavanje na zavrshen aktivnost vo databazata
+    # la1=Label(sure, text="Јас потврдувам дека означената задача е завршена:").place(x=100,y=30, height=30)
+
+    def close_window ():
+        sure.destroy()
 
 b4=Button(window, text = 'Додај', command=add_window)
 b4.place(x=650, y=170, width=120, height=30) # Ke додава нови машини во датабаза
 
 
-b5=Button(window, text = 'Заврши', command=done_window) # Ke pravi zapis od zavrshen aktivnost so momentalniot datum i vreme
+b5=Button(window, text = 'Заврши', command=done_window)
+ # Ke pravi zapis od zavrshen aktivnost so momentalniot datum i vreme
 b5.place(x=528, y=425, width=240, height=50)
 
 
