@@ -4,7 +4,7 @@ import psycopg2 as psy
 
 
 
-link =psy.connect("dbname='maintenancedb' user='postgres' password='post' host='localhost' port='5432'")
+link =psy.connect("dbname='forumdb' user='postgres' password='post' host='localhost' port='5432'")
 cur=link.cursor()
 # cur.execute("DROP TABLE Machines")
 # cur.execute("DROP TABLE Activity")
@@ -16,7 +16,7 @@ link.commit()
 link.close()   # Creates a table ako ne postoi ako postoi nisto ... ova ke se brishe izgleda ke ostane samo konekcijata ??
 
 def add_machine(Oddel, Broj):
-    link =psy.connect("dbname='maintenancedb' user='postgres' password='post' host='localhost' port='5432'")
+    link =psy.connect("dbname='forumdb' user='postgres' password='post' host='localhost' port='5432'")
     cur=link.cursor()
     cur.execute("INSERT INTO Machines VALUES(%s,%s)",(Oddel, Broj))# Treba da se dodade ako pistoi da ne stava nova!!!!
     link.commit()
@@ -24,7 +24,7 @@ def add_machine(Oddel, Broj):
 
 
 def add_activity(Oddel, Broj, Ime, Frekfentnost):
-    link =psy.connect("dbname='maintenancedb' user='postgres' password='post' host='localhost' port='5432'")
+    link =psy.connect("dbname='forumdb' user='postgres' password='post' host='localhost' port='5432'")
     cur=link.cursor()     #Oddel TEXT, Broj INTEGER, Ime TEXT, Frekfentnost INTEGER
     cur.execute("INSERT INTO Activity VALUES (%s,%s,%s,%s)", (Oddel, Broj, Ime, Frekfentnost)) # Treba da se dodade ako pistoi da ne stava nova!!!
     link.commit()
@@ -35,7 +35,7 @@ add_activity('Pletilici', 2, 'Kafena', 30)
 add_activity('pletilici', 3, 'Crna', 180)
 
 def record_keep(Oddel, Machines_id, Aktivnost_id, Frekfentnost, Data, Operator):
-    link=psy.connect("dbname='maintenancedb' user='postgres' password='post' host='localhost' port='5432'")
+    link=psy.connect("dbname='forumdb' user='postgres' password='post' host='localhost' port='5432'")
     cur=link.cursor()
     cur.execute("INSERT INTO Machine_Activity VALUES (%s,%s,%s,%s,%s,%s)", (Oddel, Machines_id, Aktivnost_id, Frekfentnost, Data, Operator))
     link.commit()
@@ -48,7 +48,7 @@ record_keep('Pletilici', 4, 1, 15, '2018-01-06', 'Marijan')
 
 
 # def zapisi():
-#     link =psy.connect("dbname='maintenancedb' user='postgres' password='post' host='localhost' port='5432'")
+#     link =psy.connect("dbname='forumdb' user='postgres' password='post' host='localhost' port='5432'")
 #     cur=link.cursor()
 #     cur.execute("SELECT * FROM Machine_Activity WHERE CURRENT_DATE - data > frekfentnost")
 #     rows=cur.fetchall()
@@ -69,7 +69,7 @@ record_keep('Pletilici', 4, 1, 15, '2018-01-06', 'Marijan')
 #     link.close()
 #
 def check():
-    link=psy.connect("dbname='maintenancedb' user='postgres' password='post' host='localhost' port='5432'")
+    link=psy.connect("dbname='forumdb' user='postgres' password='post' host='localhost' port='5432'")
     cur=link.cursor()
     cur.execute("SELECT * FROM Machines, Activity, Machine_Activity")
     rows=cur.fetchall()

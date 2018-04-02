@@ -59,7 +59,7 @@ import pandas as p
 # cur.close()  # closes cursor
 # link.close() # closes database to avoid promblem later and avoid locking database
 
-link =psy.connect("dbname='maintenancedb' user='postgres' password='post' host='localhost' port='5432'")
+link =psy.connect(dbname='maintenancedb', user='postgres', password='post', host='localhost', port='5432'")
 cur=link.cursor()
 # cur.execute("DROP TABLE book")
 cur.execute("CREATE TABLE IF NOT EXISTS Machines (id INTEGER PRIMARY KEY, Oddel TEXT, Broj INTEGER)")
@@ -72,6 +72,8 @@ list1=[]
 for x in range(1,51):
     list1.append(x)
 print(list1)
+
+link = psy.connect(dbname ='forumdb',)
 
 # df = p.read_sql_query("SELECT * from Stored limit 5", link)
 # print(df["Data"])
