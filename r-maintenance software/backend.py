@@ -8,7 +8,7 @@ cur.execute("CREATE TABLE IF NOT EXISTS TEMP (Oddel TEXT, Broj INTEGER, Opis TEX
 link.commit()
 link.close()
 
-def save_temp_log(oddel, broj, note, date=None):
+def save_temp_log(oddel, broj, note, date=None, operator, stauts=None): #datestart datefinish)
     # date = date.today()
     link =psy.connect("dbname='maintenancedb' user='postgres' password='post' host='localhost' port='5432'")
     cur=link.cursor()
