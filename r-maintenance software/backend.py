@@ -1,19 +1,19 @@
-from datetime import date
+import datetime
 import psycopg2 as psy
 
 link = psy.connect("dbname=maintenancedb", user="postgres", password="post", host="localhost", port="5432")
 cur = link.cursor()
-cur.execute("CREATE TABLE IF NOT EXISTS LOGS (ID INTEGER, Oddel TEXT, Broj INTEGER, Opis TEXT, Data DATE, Status TEXT)")
-cur.execute("CREATE TABLE IF NOT EXISTS WORKING (ID INTEGER, Oddel TEXT, Broj INTEGER, Opis TEXT, Data DATE, Status TEXT)")
-cur.execute("CREATE TABLE IF NOT EXISTS TEMP (ID INTEGER, Oddel TEXT, Broj INTEGER, Opis TEXT, Data DATE, Status TEXT)")
+cur.execute("CREATE TABLE IF NOT EXISTS LOGS (ID INTEGER, Oddel TEXT, Broj INTEGER, Opis TEXT, Data TEXT, Status TEXT)")
+cur.execute("CREATE TABLE IF NOT EXISTS WORKING (ID INTEGER, Oddel TEXT, Broj INTEGER, Opis TEXT, Data TEXT, Status TEXT)")
+cur.execute("CREATE TABLE IF NOT EXISTS TEMP (ID INTEGER, Oddel TEXT, Broj INTEGER, Opis TEXT, Data TEXT, Status TEXT, OPERATOR INT)")
 link.commit()
 link.close()
 
-def save_temp_log(oddel, broj, note, date, id=None): #datestart datefinish) oddel, broj, opis, date=None, operator, status=None, ID=None
-    # date = date.today()
+def save_temp_log(oddel, broj, note, operator, id=None, date=None): #datestart datefinish) oddel, broj, opis, date=None, operator, status=None, ID=None
+    date=(datetime.datetime.now()).strftime('%H:%M:%S %d-%m-%Y')
     link =psy.connect("dbname='maintenancedb' user='postgres' password='post' host='localhost' port='5432'")
     cur=link.cursor()
-    cur.execute("INSERT INTO TEMP VALUES(%s,%s,%s,%s %s)",(oddel, broj, note, date, id))
+    cur.execute("INSERT INTO TEMP VALUES(%s,%s,%s,%s,%s,%s,%s)",(oddel, broj, note, date, id, operator))
     link.commit()
     link.close()
 
@@ -32,14 +32,14 @@ def view_temp_logs():
     link.close()
 
 def save_log(oddel, broj, note, date=None, id=None): #date started = date from temp log, date = date finished
-    # date = date.today()
+    date=(datetime.datetime.now()).strftime('%H:%M:%S %d-%m-%Y')
     link =psy.connect("dbname='maintenancedb' user='postgres' password='post' host='localhost' port='5432'")
     cur=link.cursor()
     cur.execute("INSERT INTO LOGS VALUES(%s,%s,%s,%s,%s)",(id, oddel, broj, note, date))
     link.commit()
     link.close()
 
-# save_log("Pletilici", 1, "Problem so edna glava")
+save_log("Pletilici", 1, "Problem so edna glava")
 
 def view_saved_logs():
     link =psy.connect("dbname='maintenancedb' user='postgres' password='post' host='localhost' port='5432'")
