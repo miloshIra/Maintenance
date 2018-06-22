@@ -1,7 +1,7 @@
 from tkinter import *
 import backend
 import datetime
-
+import uuid
 
 window=Tk()
 window.title('Одржување')
@@ -15,6 +15,7 @@ def add_reporting():
 
     def add_reporting_command():
         backend.save_temp_log(oddel.get(), broj_na_mashina.get(), opis.get(), broj_na_operator.get())
+        top.destroy()
 
     b1=Button(top, text ='Пријави', command=add_reporting_command) # Gi pokazuva predhodnite zavrsheni aktivnosti
     b1.place(x=360, y=330, width=120, height=30)
@@ -66,6 +67,10 @@ def maintaining():
             l1.insert(END, row)
 
     def prevzemi_nalog():
+        x=l1.get(l1.curselection())
+        print(x[0])
+        z=uuid.uuid4().hex
+        print(z)
         backend.started_working()
 
     bm1=Button(top1, text="Превземи", command=prevzemi_nalog)
@@ -80,9 +85,8 @@ def maintaining():
     bm4=Button(top1, text="Затвори")
     bm4.place(x=715, y=200, width=140, height=50)
 
-    l1=Listbox(top1)
+    l1=Listbox(top1, selectmode=EXTENDED)
     l1.place(x=20, y=20, width=650, height=380)
-
 
 
 
@@ -94,11 +98,28 @@ def engineering():
     top2.title('Инженерство')
     top2.geometry("900x600+90+90")
 
+    def proveri_nalozi():
+        l2.delete(0,END)
+        print(l2.curselection())
+        for row in backend.view_temp_logs():
+            # current_row = row['Oddel'] + " - " + row['broj'] + " - " +  row['opis']  + " - " +  row['data']  + " - " +  row['operator']# + ", " + row['Mashina']
+            l2.insert(END, row)
+
+    # def prevzemi_nalog():
+    #     backend.started_working()
+
+
+
     l2=Listbox(top2)
     l2.place(x=20, y=20, width=650, height=250)
 
+
     l3=Listbox(top2)
     l3.place(x=20, y=290, width=650, height=250)
+
+    b31=Button(top2, text="Види", command = proveri_nalozi )
+    b31.place(x=730, y=50, width=120, height=50)
+
 
 b12=Button(window, text="Инженерство", command = engineering)
 b12.place(x=190, y=220, width=120, height=50)
