@@ -2,6 +2,7 @@ from tkinter import *
 import backend
 import datetime
 import uuid
+import threading
 
 window=Tk()
 window.title('Одржување')
@@ -60,18 +61,16 @@ def maintaining():
     top1.title('Одржување')
     top1.geometry("900x440+90+90")
 
-    def proveri_nalozi():
-        l1.delete(0,END)
-        for row in backend.view_temp_logs():
-            # current_row = row['Oddel'] + " - " + row['broj'] + " - " +  row['opis']  + " - " +  row['data']  + " - " +  row['operator']# + ", " + row['Mashina']
-            l1.insert(END, row)
+    # def proveri_nalozi():
+    #     l1.delete(0,END)
+    #     for row in backend.view_temp_logs():
+    #         # current_row = row['Oddel'] + " - " + row['broj'] + " - " +  row['opis']  + " - " +  row['data']  + " - " +  row['operator']# + ", " + row['Mashina']
+    #         l1.insert(END, row)
 
     def prevzemi_nalog():
         x=l1.get(l1.curselection())
         print(x[0])
-        z=uuid.uuid4().hex
-        print(z)
-        backend.started_working()
+        backend.started_working(int(x[0]))
 
     bm1=Button(top1, text="Превземи", command=prevzemi_nalog)
     bm1.place(x=715, y=20, width=140, height=50)
@@ -79,14 +78,30 @@ def maintaining():
     bm2=Button(top1, text="Заврши")
     bm2.place(x=715, y=350, width=140, height=50)
 
-    bm3=Button(top1, text="Види", command = proveri_nalozi)
-    bm3.place(x=715, y=100, width=140, height=50)
+    # bm3=Button(top1, text="Види", command = proveri_nalozi)
+    # bm3.place(x=715, y=100, width=140, height=50)
 
     bm4=Button(top1, text="Затвори")
     bm4.place(x=715, y=200, width=140, height=50)
 
     l1=Listbox(top1, selectmode=EXTENDED)
     l1.place(x=20, y=20, width=650, height=380)
+
+    def proveri_nalozi():
+        l1.delete(0,END)
+        for row in backend.view_temp_logs():
+            # current_row = row['Oddel'] + " - " + row['broj'] + " - " +  row['opis']  + " - " +  row['data']  + " - " +  row['operator']# + ", " + row['Mashina']
+            current_row = row[1] + " - " + row[2] + " - " +  row[3]  + " - " +  row[6].strftime("%Y-%m-%d %H:%M:%S")  + " - " +  str(row[4])# + ", " + row['Mashina']
+            l1.insert(END, current_row)
+
+    def proveri_nalozi_every_5_sec():
+        threading.Timer(5.0, proveri_nalozi_every_5_sec).start()
+        proveri_nalozi()
+
+    proveri_nalozi_every_5_sec()
+
+    bm3=Button(top1, text="Види", command = proveri_nalozi)
+    bm3.place(x=715, y=100, width=140, height=50)
 
 
 
@@ -102,8 +117,8 @@ def engineering():
         l2.delete(0,END)
         print(l2.curselection())
         for row in backend.view_temp_logs():
-            # current_row = row['Oddel'] + " - " + row['broj'] + " - " +  row['opis']  + " - " +  row['data']  + " - " +  row['operator']# + ", " + row['Mashina']
-            l2.insert(END, row)
+            current_row = row[1] + " - " + row[2] + " - " +  row[3]  + " - " +  row[6]  + " - " +  row[4]# + ", " + row['Mashina']
+            l2.insert(END, current_row)
 
     # def prevzemi_nalog():
     #     backend.started_working()
