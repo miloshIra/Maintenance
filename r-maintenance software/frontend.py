@@ -61,18 +61,34 @@ def maintaining():
     top1.title('Одржување')
     top1.geometry("900x440+90+90")
 
+    def potvrda():
+        top12=Toplevel()
+        top12.title('Превземање')
+        top12.geometry("300x200+120+100")
+
+
+
     # def proveri_nalozi():
     #     l1.delete(0,END)
     #     for row in backend.view_temp_logs():
     #         # current_row = row['Oddel'] + " - " + row['broj'] + " - " +  row['opis']  + " - " +  row['data']  + " - " +  row['operator']# + ", " + row['Mashina']
     #         l1.insert(END, row)
+        mech=StringVar()
+        mech.set("Избери")
 
-    def prevzemi_nalog():
-        x=l1.get(l1.curselection())
-        print(x[0])
-        backend.started_working(int(x[0]))
+        def prevzemi_nalog(mech=mech):
+            x=l1.get(l1.curselection())
+            print(x[0])
+            backend.started_working(int(x[0]),mech)
 
-    bm1=Button(top1, text="Превземи", command=prevzemi_nalog)
+
+        bmp1=Button(top12, text='Ок', command=prevzemi_nalog)
+        bmp1.place(x=170, y=50, width=100, height=50)
+
+        d12=OptionMenu(top12, mech, "Драги Н.","Никола Н.","Драги Б.","Марјан Х.", "Игор Г.","Гоце Ц.","Далибот Т.")
+        d12.place(x=50, y=50, width=100, height=50)
+
+    bm1=Button(top1, text="Превземи", command=potvrda)
     bm1.place(x=715, y=20, width=140, height=50)
 
     bm2=Button(top1, text="Заврши")
@@ -81,24 +97,33 @@ def maintaining():
     # bm3=Button(top1, text="Види", command = proveri_nalozi)
     # bm3.place(x=715, y=100, width=140, height=50)
 
-    bm4=Button(top1, text="Затвори")
+    def zatvori_nalog():
+        y=l1.get(l1.curselection())
+        print(y[0])
+        backend.finished_working(int(y[0]))
+
+    bm4=Button(top1, text="Затвори", command=zatvori_nalog)
     bm4.place(x=715, y=200, width=140, height=50)
+
+
 
     l1=Listbox(top1, selectmode=EXTENDED)
     l1.place(x=20, y=20, width=650, height=380)
 
     def proveri_nalozi():
         l1.delete(0,END)
-        for row in backend.view_temp_logs():
-            # current_row = row['Oddel'] + " - " + row['broj'] + " - " +  row['opis']  + " - " +  row['data']  + " - " +  row['operator']# + ", " + row['Mashina']
-            current_row = row[1] + " - " + row[2] + " - " +  row[3]  + " - " +  row[6].strftime("%Y-%m-%d %H:%M:%S")  + " - " +  str(row[4])# + ", " + row['Mashina']
-            l1.insert(END, current_row)
+        for row in backend.view_temp_logs():   # NE GO NAOGA ID JAVUVA NEKOJ TAPA ERROR ZA STR I INT CHARLIEEEEE
+            #current_row = row['Oddel'] + " - " + row['broj'] + " - " +  row['opis']  + " - " +  row['data']  + " - " +  row['operator']# + ", " + row['Mashina'] # ZA AKO ROW E STRING
+            #current_row = row[0] + " - " + row[1] + " - " + row[2] + " - " +  row[3]  + " - " + row[5]  + " - " +  row[6].strftime("%Y-%m-%d %H:%M:%S")  + " - " +  str(row[4])
+            #l1.insert(END, current_row)
+            l1.insert(END, row)
 
-    def proveri_nalozi_every_5_sec():
-        threading.Timer(5.0, proveri_nalozi_every_5_sec).start()
-        proveri_nalozi()
 
-    proveri_nalozi_every_5_sec()
+    # def proveri_nalozi_every_5_sec():
+    #     threading.Timer(5.0, proveri_nalozi_every_5_sec).start()
+    #     proveri_nalozi()
+    #
+    # proveri_nalozi_every_5_sec()
 
     bm3=Button(top1, text="Види", command = proveri_nalozi)
     bm3.place(x=715, y=100, width=140, height=50)
@@ -113,11 +138,11 @@ def engineering():
     top2.title('Инженерство')
     top2.geometry("900x600+90+90")
 
-    def proveri_nalozi():
+    def proveri_nalozi():  # ZA PROZOROT ZA INZINERI!!
         l2.delete(0,END)
         print(l2.curselection())
         for row in backend.view_temp_logs():
-            current_row = row[1] + " - " + row[2] + " - " +  row[3]  + " - " +  row[6]  + " - " +  row[4]# + ", " + row['Mashina']
+            current_row = row[1] + " - " + row[2] + " - " +  row[3]  + " - " +  row[5]  + " - " + " - " + row[4] + " - " + row[6].strftime("%Y-%m-%d %H:%M:%S")
             l2.insert(END, current_row)
 
     # def prevzemi_nalog():

@@ -4,33 +4,37 @@ import psycopg2 as psy
 
 link = psy.connect("dbname=maintenancedb", user="postgres", password="post", host="localhost", port="5432")
 cur = link.cursor()
-cur.execute("CREATE TABLE IF NOT EXISTS LOGS (ID SERIAL, Oddel TEXT, Broj TEXT, Opis TEXT, OPERATOR TEXT, Status TEXT, Data TIMESTAMP)")
+cur.execute("CREATE TABLE IF NOT EXISTS LOGS (ID SERIAL, Oddel TEXT, Broj TEXT, Opis TEXT, OPERATOR TEXT, Status TEXT, Data TIMESTAMP, MECH TEXT)")
 # cur.execute("CREATE TABLE IF NOT EXISTS WORKING (Oddel TEXT, Broj TEXT, Opis TEXT, Data DATETIME, Status TEXT)")
-cur.execute("CREATE TABLE IF NOT EXISTS TEMPO (ID SERIAL, Oddel TEXT, Broj TEXT, Opis TEXT, OPERATOR TEXT, Status TEXT, Data TIMESTAMP)")
+cur.execute("CREATE TABLE IF NOT EXISTS TEMPO (ID SERIAL, Oddel TEXT, Broj TEXT, Opis TEXT, OPERATOR TEXT, Status TEXT, Data TIMESTAMP, MECH TEXT)")
 link.commit()
 link.close()
 
-def save_temp_log(oddel, broj, note, operator, status="Чека", date=None):
+def save_temp_log(oddel, broj, note, operator, status="Чека", date=None, pocnato=None, zavrsheno=None, mech=None):
      #datestart datefinish) oddel, broj, opis, date=None, operator, status=None, ID=None
     date=(datetime.datetime.now()).strftime('%Y-%m-%d %H:%M:%S')  # isto taka treba da ima i avtomatsko id
     link =psy.connect("dbname='maintenancedb' user='postgres' password='post' host='localhost' port='5432'")
     cur=link.cursor()
-    cur.execute("INSERT INTO TEMPO (Oddel, Broj, Opis, OPERATOR, Status, Data) VALUES (%s,%s,%s,%s,%s,%s)",(oddel, broj, note, operator, status, date))
+    cur.execute("INSERT INTO TEMPO (Oddel, Broj, Opis, Operator, Status, Data) VALUES (%s,%s,%s,%s,%s,%s)",(oddel, broj, note, operator, status, date))
     link.commit()
     link.close()
 
-def started_working(_id):
+def started_working(_id, mech):
+    print(type(mech))
+    print(type(mech.get()))
     link = psy.connect("dbname='maintenancedb' user='postgres' password='post' host='localhost' port='5432'")
     cur=link.cursor()
-    cur.execute("UPDATE TEMPO SET STATUS = 'Се работи' WHERE STATUS='Чека' AND ID = %s", [_id]) # parametarot mora da e lista ?? wth ?
+    cur.execute("UPDATE tempo SET mech=%s, status = 'Се работи' WHERE status='Чека' AND id = %s", (mech.get(), _id))
+    # cur.execute("UPDATE TEMPO SET mech =%s WHERE ID=%s", [mech], [_id])
+    # parametarot mora da e lista ?? wth ?
     # cur.execute("INSERT INTO WORKING SET (%s) WHERE odrzhuvach",(odrzhuvach))
     link.commit()
     link.close()
 
-def finished_working():
-    link = psy.connect("dbname='maintenancedb' user='postgres' password='post' host='localhost' post='5432'")
+def finished_working(_id):
+    link = psy.connect("dbname='maintenancedb' user='postgres' password='post' host='localhost' port='5432'")
     cur = link.cursor()
-    cur.execute("UPDATE TEMO SET STATUS ='Завршено' WHERE STATUS='Се работи'")
+    cur.execute("UPDATE TEMPO SET STATUS = 'Завршено' WHERE STATUS='Се работи' AND ID = %s", [_id])
     link.commit()
     link.close()
 
@@ -39,10 +43,9 @@ def finished_working():
 def view_temp_logs():
     link =psy.connect("dbname='maintenancedb' user='postgres' password='post' host='localhost' port='5432'")
     cur=link.cursor()
-    cur.execute("SELECT * FROM TEMPO")
+    cur.execute("SELECT * FROM TEMPO WHERE status != 'Завршено'")
     rows=cur.fetchall()
     # link.close()
-    print(rows)
     return rows
 
 def save_log(oddel, broj, note, date=None, id=None): #date started = date from temp log, date = date finished
@@ -58,7 +61,7 @@ def save_log(oddel, broj, note, date=None, id=None): #date started = date from t
 def view_saved_logs():
     link =psy.connect("dbname='maintenancedb' user='postgres' password='post' host='localhost' port='5432'")
     cur=link.cursor()
-    cur.execute("SELECT * FROM LOGS")
+    cur.execute("SELECT * FROM LOGS") # moze so edna tabela selec * from tempo where id ="_id " and status != Zavrsheno 
     link.commit()
     link.close()
 
