@@ -91,8 +91,8 @@ def maintaining():
     bm1=Button(top1, text="Превземи", command=potvrda)
     bm1.place(x=715, y=20, width=140, height=50)
 
-    bm2=Button(top1, text="Заврши")
-    bm2.place(x=715, y=350, width=140, height=50)
+    # bm2=Button(top1, text="Заврши")
+    # bm2.place(x=715, y=350, width=140, height=50)
 
     # bm3=Button(top1, text="Види", command = proveri_nalozi)
     # bm3.place(x=715, y=100, width=140, height=50)
@@ -102,8 +102,19 @@ def maintaining():
         print(y[0])
         backend.finished_working(int(y[0]))
 
-    bm4=Button(top1, text="Затвори", command=zatvori_nalog)
-    bm4.place(x=715, y=200, width=140, height=50)
+    def potvrdi_zatvaranje():
+        top13=Toplevel()
+        top13.title("Потврда")
+        top13.geometry("450x100+120+100")
+
+        bp1=Button(top13, text="Потврди и зачувај", command=zatvori_nalog)
+        bp1.place(x=160, y=55, width=120, height=25)
+
+        lp1=Label(top13, text="Дали си сигурен дека сакаш да го потврдиш и зачуваш налогот ?")
+        lp1.place(x=30, y=25, width=400, height=30)
+
+    bm4=Button(top1, text="Затвори", command=potvrdi_zatvaranje)
+    bm4.place(x=715, y=350, width=140, height=50)
 
 
 
@@ -126,7 +137,7 @@ def maintaining():
     # proveri_nalozi_every_5_sec()
 
     bm3=Button(top1, text="Види", command = proveri_nalozi)
-    bm3.place(x=715, y=100, width=140, height=50)
+    bm3.place(x=715, y=80, width=140, height=50)
 
 
 
@@ -157,8 +168,11 @@ def engineering():
     l3=Listbox(top2)
     l3.place(x=20, y=290, width=650, height=250)
 
-    b31=Button(top2, text="Види", command = proveri_nalozi )
-    b31.place(x=730, y=50, width=120, height=50)
+    b31=Button(top2, text="Види", command=proveri_nalozi)
+    b31.place(x=730, y=40, width=120, height=50)
+
+    b32=Button(top2, text="Пребарај") # command=prebaraj_nalozi)
+    b32.place(x=730, y=489, width=120, heigh=50)
 
 
 b12=Button(window, text="Инженерство", command = engineering)

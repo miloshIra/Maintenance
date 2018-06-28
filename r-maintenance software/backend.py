@@ -20,8 +20,6 @@ def save_temp_log(oddel, broj, note, operator, status="Чека", date=None, poc
     link.close()
 
 def started_working(_id, mech):
-    print(type(mech))
-    print(type(mech.get()))
     link = psy.connect("dbname='maintenancedb' user='postgres' password='post' host='localhost' port='5432'")
     cur=link.cursor()
     cur.execute("UPDATE tempo SET mech=%s, status = 'Се работи' WHERE status='Чека' AND id = %s", (mech.get(), _id))
@@ -43,7 +41,7 @@ def finished_working(_id):
 def view_temp_logs():
     link =psy.connect("dbname='maintenancedb' user='postgres' password='post' host='localhost' port='5432'")
     cur=link.cursor()
-    cur.execute("SELECT * FROM TEMPO WHERE status != 'Завршено'")
+    cur.execute("SELECT * FROM TEMPO") #WHERE status != 'Завршено'")
     rows=cur.fetchall()
     # link.close()
     return rows
@@ -58,18 +56,10 @@ def save_log(oddel, broj, note, date=None, id=None): #date started = date from t
 
 # save_log("Pletilici", 1, "Problem so edna glava")
 
-def view_saved_logs():
+
+def filter_logs(startdate=None, enddate=None, oddel=None, Broj=None): #moze ke ima plus filteri ke vidime. Filtriranje po mashina treba da ima isto taka ..
     link =psy.connect("dbname='maintenancedb' user='postgres' password='post' host='localhost' port='5432'")
     cur=link.cursor()
-    cur.execute("SELECT * FROM LOGS") # moze so edna tabela selec * from tempo where id ="_id " and status != Zavrsheno 
+    cur.execute("SELECT FROM LOGS WHERE Data BETWEEN %s AND %s OR oddel= %s AND broj=%s"), (startdate, enddate, oddel, broj)
     link.commit()
-    link.close()
-
-def filter_logs(startdate=None, enddate=None, id=None, Broj=None): #moze ke ima plus filteri ke vidime. Filtriranje po mashina treba da ima isto taka ..
-    link =psy.connect("dbname='maintenancedb' user='postgres' password='post' host='localhost' port='5432'")
-    cur=link.cursor()
-    cur.execute("SELECT FROM LOGS WHERE Data BETWEEN %s AND %s")
-    link.commit()
-    link.close()
-
-# MAYBE ADD Filtering by date later... not .. dont make it more complex than it needs to be. or maybe you are gonna have to have this .. fck me... ...
+link.close()
