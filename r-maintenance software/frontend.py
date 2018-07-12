@@ -156,8 +156,37 @@ def engineering():
             current_row = row[1] + " - " + row[2] + " - " +  row[3]  + " - " +  row[5]  + " - " + " - " + row[4] + " - " + row[6].strftime("%Y-%m-%d %H:%M:%S")
             l2.insert(END, current_row)
 
+    def baraj_nalozi():
+        top22=Toplevel()
+        top22.title=('Види историја на интервенции')
+        top22.geometry("600x550+120+120")
     # def prevzemi_nalog():
     #     backend.started_working()
+        odd=StringVar()
+        brojm=StringVar()
+        timeS=StringVar()
+        timeF=StringVar()
+        odrz=StringVar()
+
+        l21=Listbox(top22)
+        l21.place(x=25, y=200, width=550, height=120)
+
+        d21=OptionMenu(top22, odd, "Plet","Est","Bob","Esta", "Mat","Benda")
+        d21.place(x=50, y=50, width=100, height=50)
+
+        d22=OptionMenu(top22, brojm, "Драги Н.","Никола Н.","Драги Б.","Марјан Х.", "Игор Г.","Гоце Ц.","Далибот Т.")
+        d22.place(x=170, y=50, width=100, height=50)
+
+        d23=OptionMenu(top22, timeS,"Драги Н.","Никола Н.","Драги Б.","Марјан Х.", "Игор Г.","Гоце Ц.","Далибот Т.")
+        d23.place(x=290, y=50, width=100, height=50)
+
+        d24=OptionMenu(top22, timeF, "Драги Н.","Никола Н.","Драги Б.","Марјан Х.", "Игор Г.","Гоце Ц.","Далибот Т.")
+        d24.place(x=410, y=50, width=100, height=50)
+
+        d25=OptionMenu(top22, odrz, "Драги Н.","Никола Н.","Драги Б.","Марјан Х.", "Игор Г.","Гоце Ц.","Далибот Т.")
+        d25.place(x=410, y=100, width=100, height=50)
+
+
 
 
 
@@ -171,7 +200,7 @@ def engineering():
     b31=Button(top2, text="Види", command=proveri_nalozi)
     b31.place(x=730, y=40, width=120, height=50)
 
-    b32=Button(top2, text="Пребарај") # command=prebaraj_nalozi)
+    b32=Button(top2, text="Пребарај", command=baraj_nalozi)
     b32.place(x=730, y=489, width=120, heigh=50)
 
 
