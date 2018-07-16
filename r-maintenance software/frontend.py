@@ -78,7 +78,6 @@ def maintaining():
 
         def prevzemi_nalog(mech=mech):
             x=l1.get(l1.curselection())
-            print(x[0])
             backend.started_working(int(x[0]),mech)
 
 
@@ -99,7 +98,6 @@ def maintaining():
 
     def zatvori_nalog():
         y=l1.get(l1.curselection())
-        print(y[0])
         backend.finished_working(int(y[0]))
 
     def potvrdi_zatvaranje():
@@ -151,7 +149,6 @@ def engineering():
 
     def proveri_nalozi():  # ZA PROZOROT ZA INZINERI!!
         l2.delete(0,END)
-        print(l2.curselection())
         for row in backend.view_temp_logs():
             current_row = row[1] + " - " + row[2] + " - " +  row[3]  + " - " +  row[5]  + " - " + " - " + row[4] + " - " + row[6].strftime("%Y-%m-%d %H:%M:%S")
             l2.insert(END, current_row)
@@ -174,13 +171,13 @@ def engineering():
         d21=OptionMenu(top22, odd, "Plet","Est","Bob","Esta", "Mat","Benda")
         d21.place(x=50, y=50, width=100, height=50)
 
-        d22=OptionMenu(top22, brojm, "Драги Н.","Никола Н.","Драги Б.","Марјан Х.", "Игор Г.","Гоце Ц.","Далибот Т.")
+        d22=OptionMenu(top22, brojm, "1","2","3","4", "5","6","7","8","9","10","11","12","13","14", "15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30")
         d22.place(x=170, y=50, width=100, height=50)
 
-        d23=OptionMenu(top22, timeS,"Драги Н.","Никола Н.","Драги Б.","Марјан Х.", "Игор Г.","Гоце Ц.","Далибот Т.")
+        d23=OptionMenu(top22, timeS,"Време П.")
         d23.place(x=290, y=50, width=100, height=50)
 
-        d24=OptionMenu(top22, timeF, "Драги Н.","Никола Н.","Драги Б.","Марјан Х.", "Игор Г.","Гоце Ц.","Далибот Т.")
+        d24=OptionMenu(top22, timeF, "Време К.")
         d24.place(x=410, y=50, width=100, height=50)
 
         d25=OptionMenu(top22, odrz, "Драги Н.","Никола Н.","Драги Б.","Марјан Х.", "Игор Г.","Гоце Ц.","Далибот Т.")
