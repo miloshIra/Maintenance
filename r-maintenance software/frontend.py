@@ -155,36 +155,57 @@ def engineering():
 
     def baraj_nalozi():
         top22=Toplevel()
-        top22.title=('Види историја на интервенции')
-        top22.geometry("600x550+120+120")
+        top22.title=("Види историја на интервенции")
+        top22.geometry("600x200+133+145")
     # def prevzemi_nalog():
     #     backend.started_working()
         odd=StringVar()
+        odd.set(None)
         brojm=StringVar()
+        brojm.set(None)
         timeS=StringVar()
+        timeS.set(None)
         timeF=StringVar()
+        timeF.set(None)
         odrz=StringVar()
+        odrz.set(None)
 
-        l21=Listbox(top22)
-        l21.place(x=25, y=200, width=550, height=120)
+        def prebaraj_istorija_na_nalozi():
+            l3.delete(0,END)
+            for row in backend.filter_logs():   # NE GO NAOGA ID JAVUVA NEKOJ TAPA ERROR ZA STR I INT CHARLIEEEEE
+                #current_row = row['Oddel'] + " - " + row['broj'] + " - " +  row['opis']  + " - " +  row['data']  + " - " +  row['operator']# + ", " + row['Mashina'] # ZA AKO ROW E STRING
+                #current_row = row[0] + " - " + row[1] + " - " + row[2] + " - " +  row[3]  + " - " + row[5]  + " - " +  row[6].strftime("%Y-%m-%d %H:%M:%S")  + " - " +  str(row[4])
+                #l1.insert(END, current_row)
+                l3.insert(END, row)
 
-        d21=OptionMenu(top22, odd, "Plet","Est","Bob","Esta", "Mat","Benda")
-        d21.place(x=50, y=50, width=100, height=50)
 
-        d22=OptionMenu(top22, brojm, "1","2","3","4", "5","6","7","8","9","10","11","12","13","14", "15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30")
-        d22.place(x=170, y=50, width=100, height=50)
+        # l21=Listbox(top22)
+        # l21.place(x=25, y=200, width=550, height=120)
+        l21=Label(top22, text="Оддел:").place(x=40, y=25, width=80, height=30)
+        d21=OptionMenu(top22, odd, "None","Plet","Est","Bob","Esta", "Mat","Benda")
+        d21.place(x=50, y=50, width=70, height=30)
 
+        l22=Label(top22, text="Машина:").place(x=130, y=25, width=80, height=30)
+        d22=OptionMenu(top22, brojm, "1","2","3","4", "5","6","7","8","9","10","11","12","13","14", "15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50")
+        d22.place(x=140, y=50, width=70, height=30)
+
+        l23=Label(top22, text="Време од:").place(x=230, y=25, width=80, height=30)
         d23=OptionMenu(top22, timeS,"Време П.")
-        d23.place(x=290, y=50, width=100, height=50)
+        d23.place(x=230, y=50, width=100, height=30)
 
+        l24=Label(top22, text="Време до:").place(x=350, y=25, width=80, height=30)
         d24=OptionMenu(top22, timeF, "Време К.")
-        d24.place(x=410, y=50, width=100, height=50)
+        d24.place(x=350, y=50, width=100, height=30)
 
+        l25=Label(top22, text="Oператор:").place(x=480, y=25, width=80, height=30)
         d25=OptionMenu(top22, odrz, "Драги Н.","Никола Н.","Драги Б.","Марјан Х.", "Игор Г.","Гоце Ц.","Далибот Т.")
-        d25.place(x=410, y=100, width=100, height=50)
+        d25.place(x=470, y=50, width=100, height=30)
 
+        l26=Label(top22, text="Пребарувањето може да се врши со толку параметри колку").place(x=40, y=145, width=500, height=20)
+        l27=Label(top22, text="што ви требаат за да не се земат во предвид останатите парапетри оставети ги празни.").place(x=40, y=165, width=500, height=20)
 
-
+        b11=Button(top22,text="Пребарај", command = prebaraj_istorija_na_nalozi)
+        b11.place(x=230, y=100, width=100, height=35)
 
 
     l2=Listbox(top2)

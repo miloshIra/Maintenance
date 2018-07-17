@@ -57,9 +57,9 @@ def save_log(oddel, broj, note, date=None, id=None): #date started = date from t
 # save_log("Pletilici", 1, "Problem so edna glava")
 
 
-def filter_logs(startdate=None, enddate=None, oddel=None, Broj=None): #moze ke ima plus filteri ke vidime. Filtriranje po mashina treba da ima isto taka ..
+def filter_logs(oddel=None, mashina=None, timeS=None, timeF=None, odrz=None): #moze ke ima plus filteri ke vidime. Filtriranje po mashina treba da ima isto taka ..
     link =psy.connect("dbname='maintenancedb' user='postgres' password='post' host='localhost' port='5432'")
     cur=link.cursor()
-    cur.execute("SELECT FROM LOGS WHERE Data BETWEEN %s AND %s OR oddel= %s AND broj=%s"), (startdate, enddate, oddel, broj)
+    cur.execute("SELECT FROM LOGS WHERE Data BETWEEN (%s) AND (%s) OR oddel= (%s) OR broj=(%s) OR mech=(%s)"), (startdate, enddate, oddel, broj, odrz)
     link.commit()
 link.close()
