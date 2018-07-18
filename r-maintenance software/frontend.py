@@ -77,6 +77,7 @@ def maintaining():
         mech.set("Избери")
 
         def prevzemi_nalog(mech=mech):
+            if mech=
             x=l1.get(l1.curselection())
             backend.started_working(int(x[0]),mech)
 
@@ -163,10 +164,10 @@ def engineering():
         odd.set(None)
         brojm=StringVar()
         brojm.set(None)
-        timeS=StringVar()
-        timeS.set(None)
-        timeF=StringVar()
-        timeF.set(None)
+        pocnato=StringVar()
+        pocnato.set(None)
+        zavrsheno=StringVar()
+        zavrsheno.set(None)
         odrz=StringVar()
         odrz.set(None)
 
@@ -190,11 +191,11 @@ def engineering():
         d22.place(x=140, y=50, width=70, height=30)
 
         l23=Label(top22, text="Време од:").place(x=230, y=25, width=80, height=30)
-        d23=OptionMenu(top22, timeS,"Време П.")
+        d23=OptionMenu(top22, pocnato,"Време П.")
         d23.place(x=230, y=50, width=100, height=30)
 
         l24=Label(top22, text="Време до:").place(x=350, y=25, width=80, height=30)
-        d24=OptionMenu(top22, timeF, "Време К.")
+        d24=OptionMenu(top22, zavrsheno, "Време К.")
         d24.place(x=350, y=50, width=100, height=30)
 
         l25=Label(top22, text="Oператор:").place(x=480, y=25, width=80, height=30)

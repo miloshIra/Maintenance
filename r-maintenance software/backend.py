@@ -57,9 +57,11 @@ def save_log(oddel, broj, note, date=None, id=None): #date started = date from t
 # save_log("Pletilici", 1, "Problem so edna glava")
 
 
-def filter_logs(oddel=None, mashina=None, timeS=None, timeF=None, odrz=None): #moze ke ima plus filteri ke vidime. Filtriranje po mashina treba da ima isto taka ..
+def filter_logs(oddel=None, mashina=None, pocnato=None, zavrsheno=None, odrz=None): #moze ke ima plus filteri ke vidime. Filtriranje po mashina treba da ima isto taka ..
     link =psy.connect("dbname='maintenancedb' user='postgres' password='post' host='localhost' port='5432'")
     cur=link.cursor()
-    cur.execute("SELECT FROM LOGS WHERE Data BETWEEN (%s) AND (%s) OR oddel= (%s) OR broj=(%s) OR mech=(%s)"), (startdate, enddate, oddel, broj, odrz)
+    cur.execute("SELECT FROM TEMPO WHERE Data BETWEEN s% AND %s OR oddel=%s OR broj=%s OR mech=(%s)"), (pocnato.get(), zavrsheno.get(), oddel.get(), broj.get(), odrz.get())
     link.commit()
 link.close()
+
+#Smeni ja funkcijata vo print na lista od parametrite sto doagaat pa posle prenapishi go querito ne bidi bot..
