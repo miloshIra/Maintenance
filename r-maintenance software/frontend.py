@@ -77,7 +77,6 @@ def maintaining():
         mech.set("Избери")
 
         def prevzemi_nalog(mech=mech):
-            if mech=
             x=l1.get(l1.curselection())
             backend.started_working(int(x[0]),mech)
 
@@ -160,8 +159,8 @@ def engineering():
         top22.geometry("600x200+133+145")
     # def prevzemi_nalog():
     #     backend.started_working()
-        odd=StringVar()
-        odd.set(None)
+        oddel=StringVar()
+        oddel.set(None)
         brojm=StringVar()
         brojm.set(None)
         pocnato=StringVar()
@@ -171,9 +170,9 @@ def engineering():
         odrz=StringVar()
         odrz.set(None)
 
-        def prebaraj_istorija_na_nalozi():
+        def prebaraj_istorija_na_nalozi(oddel=oddel, brojm=brojm, pocnato=pocnato, zavrsheno=zavrsheno, odrz=odrz):
             l3.delete(0,END)
-            for row in backend.filter_logs():   # NE GO NAOGA ID JAVUVA NEKOJ TAPA ERROR ZA STR I INT CHARLIEEEEE
+            for row in backend.filter_logs(oddel, brojm, pocnato, zavrsheno, odrz):   # NE GO NAOGA ID JAVUVA NEKOJ TAPA ERROR ZA STR I INT CHARLIEEEEE
                 #current_row = row['Oddel'] + " - " + row['broj'] + " - " +  row['opis']  + " - " +  row['data']  + " - " +  row['operator']# + ", " + row['Mashina'] # ZA AKO ROW E STRING
                 #current_row = row[0] + " - " + row[1] + " - " + row[2] + " - " +  row[3]  + " - " + row[5]  + " - " +  row[6].strftime("%Y-%m-%d %H:%M:%S")  + " - " +  str(row[4])
                 #l1.insert(END, current_row)
@@ -183,7 +182,7 @@ def engineering():
         # l21=Listbox(top22)
         # l21.place(x=25, y=200, width=550, height=120)
         l21=Label(top22, text="Оддел:").place(x=40, y=25, width=80, height=30)
-        d21=OptionMenu(top22, odd, "None","Plet","Est","Bob","Esta", "Mat","Benda")
+        d21=OptionMenu(top22, oddel, "None","Plet","Est","Bob","Esta", "Mat","Benda")
         d21.place(x=50, y=50, width=70, height=30)
 
         l22=Label(top22, text="Машина:").place(x=130, y=25, width=80, height=30)
