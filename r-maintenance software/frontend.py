@@ -77,8 +77,14 @@ def maintaining():
         mech.set("Избери")
 
         def prevzemi_nalog(mech=mech):
-            x=l1.get(l1.curselection())
-            backend.started_working(int(x[0]),mech)
+            if mech != ("Избери"):
+                x=l1.get(l1.curselection())
+                backend.started_working(int(x[0]),mech)
+                top12.destroy()
+            else:
+                top13=Toplevel()
+                top13.title('Избери оператор')
+                top13.geometry("200x150+140+120")
 
 
         bmp1=Button(top12, text='Ок', command=prevzemi_nalog)
@@ -170,9 +176,9 @@ def engineering():
         odrz=StringVar()
         odrz.set(None)
 
-        def prebaraj_istorija_na_nalozi(oddel=oddel, brojm=brojm, pocnato=pocnato, zavrsheno=zavrsheno, odrz=odrz):
+        def prebaraj_istorija_na_nalozi(oddel=oddel, brojm=brojm, odrz=odrz):
             l3.delete(0,END)
-            for row in backend.filter_logs(oddel, brojm, pocnato, zavrsheno, odrz):   # NE GO NAOGA ID JAVUVA NEKOJ TAPA ERROR ZA STR I INT CHARLIEEEEE
+            for row in backend.filter_logs(oddel, brojm, odrz):   # NE GO NAOGA ID JAVUVA NEKOJ TAPA ERROR ZA STR I INT CHARLIEEEEE
                 #current_row = row['Oddel'] + " - " + row['broj'] + " - " +  row['opis']  + " - " +  row['data']  + " - " +  row['operator']# + ", " + row['Mashina'] # ZA AKO ROW E STRING
                 #current_row = row[0] + " - " + row[1] + " - " + row[2] + " - " +  row[3]  + " - " + row[5]  + " - " +  row[6].strftime("%Y-%m-%d %H:%M:%S")  + " - " +  str(row[4])
                 #l1.insert(END, current_row)
