@@ -78,3 +78,13 @@ link = psy.connect(dbname ='forumdb',)
 # df = p.read_sql_query("SELECT * from Stored limit 5", link)
 # print(df["Data"])
 # type(df)
+
+class User(oblect):
+
+    def login(user, keys):
+        self.user = user
+        serf.keyw = keyw
+        check = cur.execute("SELECT PASS WHERE USER=(self.user)")
+        if then check = self.keyw
+
+        # This is dumb .. make a user login template you can use anywhere  .. make it real good and oop and shit ;)
