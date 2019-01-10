@@ -1,5 +1,4 @@
 import datetime
-import pandas as p
 import psycopg2 as psy
 
 
