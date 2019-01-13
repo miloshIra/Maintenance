@@ -4,6 +4,7 @@ from tkinter import scrolledtext
 from tkinter import Menu
 from tkinter import messagebox as mBox
 from tkinter import Spinbox
+import mback
 
 
 
@@ -17,12 +18,20 @@ class Main():
     def createWidgets(self):
         tabControl = ttk.Notebook(self.win)
 
-        Одржување = ttk.Frame(tabControl)
-        tabControl.add(Одржување, text='Одржување')
+
+
+        tab1 = ttk.Frame(tabControl)   # -------------------------- First TAB (Odrzuvanje)
+        tabControl.add(tab1, text='Одржување')
         tabControl.place(x=10, y=50)
 
-        Магацин = ttk.Frame(tabControl)
-        tabControl.add(Магацин, text='Магацин')
+        Label = ttk.Label(tab1, text='asdasd')
+        Label.place(x=20, y=80)
+
+        action = ttk.Button(tab1, text='Click here', command=mback.clickMe)
+        action.place(x=40, y=100)
+
+        tab2 = ttk.Frame(tabControl)
+        tabControl.add(tab2, text='Магацин')
 
 
 
