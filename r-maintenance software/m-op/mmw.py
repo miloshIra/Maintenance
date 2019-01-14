@@ -1,9 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
-from tkinter import scrolledtext
-from tkinter import Menu
-from tkinter import messagebox as mBox
-from tkinter import Spinbox
+
 import mback
 
 
@@ -16,24 +13,28 @@ class Main():
         self.createWidgets()
 
     def createWidgets(self):
+
         tabControl = ttk.Notebook(self.win)
 
-
-
         tab1 = ttk.Frame(tabControl)   # -------------------------- First TAB (Odrzuvanje)
+        tabControl.pack(expand=1, fill="both")
+
         tabControl.add(tab1, text='Одржување')
-        tabControl.place(x=10, y=50)
 
-        Label = ttk.Label(tab1, text='asdasd')
-        Label.place(x=20, y=80)
 
-        action = ttk.Button(tab1, text='Click here', command=mback.clickMe)
-        action.place(x=40, y=100)
 
         tab2 = ttk.Frame(tabControl)
         tabControl.add(tab2, text='Магацин')
 
+        FrameT1 = ttk.LabelFrame(tab1, text="Налози и историја") # ---------- Frame label doesnt show without Labels !!
+        FrameT1.grid(column=0, row=0, padx=10, pady=10)
+        ttk.Label(FrameT1, text="Enter a name:").grid(column=0, row=0)
 
+        Label = ttk.Label(FrameT1, text='A Button!!')
+        Label.grid(column=1, row=1)
+
+        action = ttk.Button(FrameT1, text='Click here', command=mback.clickMe)
+        action.grid(column=2, row=2)
 
 # window = tk.Tk()
 # window.title('Vitek Maintenance')

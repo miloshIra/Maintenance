@@ -18,6 +18,7 @@ class Main():
 
         nameEntered = ttk.Entry(self.win, width=17, textvariable=name)
         nameEntered.place(x=30, y=80)
+        nameEntered.focus()
 
         button = ttk.Button(self.win, text="Done!")
         button.place(x=30, y=130)
